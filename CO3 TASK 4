@@ -1,0 +1,68 @@
+#include <stdio.h>
+
+#define ROW 3
+#define COL 4
+
+void row_totals(int rain[ROW][COL])
+{
+    for(int i = 0; i < ROW; i++)
+    {
+        int total = 0;
+
+        for(int j = 0; j < COL; j++)
+            total += rain[i][j];
+
+        printf("District %d Total = %d\n",i+1,total);
+    }
+}
+
+void monthly_average(int rain[ROW][COL])
+{
+    for(int j = 0; j < COL; j++)
+    {
+        int total = 0;
+
+        for(int i = 0; i < ROW; i++)
+            total += rain[i][j];
+
+        printf("Month %d Average = %.2f\n",
+               j+1,total/(float)ROW);
+    }
+}
+
+void maximum_rainfall(int rain[ROW][COL])
+{
+    int max = rain[0][0];
+    int x = 0, y = 0;
+
+    for(int i = 0; i < ROW; i++)
+    {
+        for(int j = 0; j < COL; j++)
+        {
+            if(rain[i][j] > max)
+            {
+                max = rain[i][j];
+                x = i;
+                y = j;
+            }
+        }
+    }
+
+    printf("Maximum Rainfall = %d\n",max);
+    printf("District = %d, Month = %d\n",x+1,y+1);
+}
+
+int main()
+{
+    int rain[ROW][COL] = {
+        {100,120,150,180},
+        {80,90,110,130},
+        {200,220,250,300}
+    };
+
+    row_totals(rain);
+    monthly_average(rain);
+    maximum_rainfall(rain);
+
+    return 0;
+}
