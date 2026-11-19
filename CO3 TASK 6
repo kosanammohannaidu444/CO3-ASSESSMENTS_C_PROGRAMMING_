@@ -1,0 +1,71 @@
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    char names[5][30] = {
+        "Ravi",
+        "Arun",
+        "Kiran",
+        "Manoj",
+        "Arun"
+    };
+
+    char temp[30];
+    char search[] = "Kiran";
+    int n = 5;
+
+    /* Sorting names */
+    for(int i = 0; i < n-1; i++)
+    {
+        for(int j = 0; j < n-i-1; j++)
+        {
+            if(strcmp(names[j],names[j+1]) > 0)
+            {
+                strcpy(temp,names[j]);
+                strcpy(names[j],names[j+1]);
+                strcpy(names[j+1],temp);
+            }
+        }
+    }
+
+    printf("Sorted Names:\n");
+
+    for(int i = 0; i < n; i++)
+        printf("%s\n",names[i]);
+
+    /* Binary Search */
+    int low = 0, high = n-1, found = -1;
+
+    while(low <= high)
+    {
+        int mid = low + (high-low)/2;
+        int result = strcmp(names[mid],search);
+
+        if(result == 0)
+        {
+            found = mid;
+            break;
+        }
+        else if(result < 0)
+            low = mid+1;
+        else
+            high = mid-1;
+    }
+
+    if(found != -1)
+        printf("%s Found at position %d\n",search,found+1);
+    else
+        printf("Name Not Found\n");
+
+    /* Duplicate Detection */
+    printf("Duplicate Names:\n");
+
+    for(int i = 0; i < n-1; i++)
+    {
+        if(strcmp(names[i],names[i+1]) == 0)
+            printf("%s\n",names[i]);
+    }
+
+    return 0;
+}
