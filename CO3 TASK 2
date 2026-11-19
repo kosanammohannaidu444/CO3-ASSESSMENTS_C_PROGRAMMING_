@@ -1,0 +1,103 @@
+#include <stdio.h>
+
+int main()
+{
+    int a[] = {45,12,78,23,56,10};
+    int b[] = {45,12,78,23,56,10};
+    int c[] = {45,12,78,23,56,10};
+    int n = 6, temp, comparisons, swaps;
+
+    /* Bubble Sort */
+    comparisons = swaps = 0;
+
+    for(int i = 0; i < n-1; i++)
+    {
+        int flag = 0;
+
+        for(int j = 0; j < n-i-1; j++)
+        {
+            comparisons++;
+
+            if(a[j] > a[j+1])
+            {
+                temp = a[j];
+                a[j] = a[j+1];
+                a[j+1] = temp;
+                swaps++;
+                flag = 1;
+            }
+        }
+
+        if(flag == 0)
+            break;
+    }
+
+    printf("Bubble Sort: ");
+    for(int i = 0; i < n; i++)
+        printf("%d ",a[i]);
+
+    printf("\nComparisons = %d, Swaps = %d\n",comparisons,swaps);
+
+    /* Selection Sort */
+    comparisons = swaps = 0;
+
+    for(int i = 0; i < n-1; i++)
+    {
+        int min = i;
+
+        for(int j = i+1; j < n; j++)
+        {
+            comparisons++;
+
+            if(b[j] < b[min])
+                min = j;
+        }
+
+        if(min != i)
+        {
+            temp = b[i];
+            b[i] = b[min];
+            b[min] = temp;
+            swaps++;
+        }
+    }
+
+    printf("Selection Sort: ");
+    for(int i = 0; i < n; i++)
+        printf("%d ",b[i]);
+
+    printf("\nComparisons = %d, Swaps = %d\n",comparisons,swaps);
+
+    /* Insertion Sort */
+    comparisons = swaps = 0;
+
+    for(int i = 1; i < n; i++)
+    {
+        int key = c[i];
+        int j = i-1;
+
+        while(j >= 0)
+        {
+            comparisons++;
+
+            if(c[j] > key)
+            {
+                c[j+1] = c[j];
+                swaps++;
+                j--;
+            }
+            else
+                break;
+        }
+
+        c[j+1] = key;
+    }
+
+    printf("Insertion Sort: ");
+    for(int i = 0; i < n; i++)
+        printf("%d ",c[i]);
+
+    printf("\nComparisons = %d, Shifts = %d\n",comparisons,swaps);
+
+    return 0;
+}
